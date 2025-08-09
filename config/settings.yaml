@@ -1,0 +1,19 @@
+# config/settings.yaml
+locale: 
+  primary: LV
+  secondary: RU
+currency: EUR
+thresholds:
+  price_change_pct: 8   # % to flag price change
+  new_items_min: 3
+schedule:
+  cron_utc: "30 5 * * 1"   # Mondays 08:30 Europe/Riga ~ 05:30 UTC
+signals:
+  - prices
+  - availability
+  - promos
+  - new_sku
+report:
+  top_insights: 5
+  output_dir: "docs/reports"
+  site_index: "docs/index.html"
