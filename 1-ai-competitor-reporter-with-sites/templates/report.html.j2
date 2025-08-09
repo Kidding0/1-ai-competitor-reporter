@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atskaites / Отчёт — {{ period_label }}</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; max-width: 1120px; margin: 32px auto; padding: 0 16px; }
+    h1 { font-size: 28px; margin: 0 0 6px; }
+    h2 { margin-top: 24px; }
+    .muted { color: #666; }
+    .card { border: 1px solid #eee; padding: 16px; border-radius: 8px; margin: 8px 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #eee; padding: 8px; text-align: left; vertical-align: top; }
+    .badge { display:inline-block; padding:2px 8px; border-radius: 999px; background:#f5f5f5; border:1px solid #eaeaea; font-size:12px; }
+    .insight { border-left: 4px solid #222; padding-left: 12px; margin: 12px 0; }
+    .small { font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Konkurentu atskaite / Отчёт по конкурентам</h1>
+    <div class="muted">{{ period_label }} • Ģenerēts: {{ generated_at }}</div>
+  </header>
+
+  <section>
+    <h2>Top {{ top_n }} ieguvumi / ключевых инсайтов</h2>
+    {% for it in insights %}
+      <div class="card insight">
+        <strong>{{ loop.index }}.</strong> {{ it.lv }}
+        <div class="small muted">{{ it.ru }}</div>
+        {% if it.action %}
+          <div class="small"><span class="badge">Rīcība / Действие</span> {{ it.action }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </section>
+
+  <section class="grid">
+    <div>
+      <h2>Cenu dinamika / Динамика цен</h2>
+      <img src="fig_prices.png" alt="Price dynamics" style="width:100%">
+    </div>
+    <div>
+      <h2>Notikumi / Изменения</h2>
+      <table>
+        <thead><tr><th>Konkurents / Конкурент</th><th>Notikums / Событие</th><th>Saite / Ссылка</th></tr></thead>
+        <tbody>
+          {% for ev in events %}
+            <tr>
+              <td>{{ ev.competitor }}</td>
+              <td>{{ ev.label }}</td>
+              <td><a href="{{ ev.url }}" target="_blank">{{ ev.url }}</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="muted small" style="margin-top:24px;">
+    Atskaites ģenerētas automātiski no publiskiem datiem. / Отчёт сформирован автоматически из публичных данных.
+  </footer>
+</body>
+</html>
