@@ -25,7 +25,7 @@ def main_send_latest():
         print("[bot] Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID")
         return
     today = datetime.now(timezone.utc).date().isoformat()
-    url = f"https://Kidding0.github.io/ai-competitor-reporter/reports/{today}/report.html"
+    url = url = f"https://Kidding0.github.io/1-ai-competitor-reporter/reports/{today}/report.html"
     ins = {"insights":[]}
     if os.path.exists(INS):
         ins = json.load(open(INS, encoding="utf-8"))
